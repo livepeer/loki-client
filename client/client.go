@@ -118,7 +118,6 @@ func (c *Client) run() {
 
 			batchSize += len(e.Line)
 			fp := e.labels.String()
-			c.log("info:", "Labels for stream:", fp)
 			stream, ok := batch[fp]
 			if !ok {
 				stream = &logproto.Stream{
@@ -126,7 +125,6 @@ func (c *Client) run() {
 				}
 				batch[fp] = stream
 			}
-			c.log("info:", "Appended entry:", e.Entry.Timestamp, e.Entry.Line)
 			stream.Entries = append(stream.Entries, e.Entry)
 
 		case <-maxWait.C:

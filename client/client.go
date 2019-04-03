@@ -149,7 +149,6 @@ func (c *Client) sendBatch(batch map[string]*logproto.Stream) {
 	var status int
 	for backoff.Ongoing() {
 		status, err = c.send(ctx, buf)
-		c.log("info:", "Batch sent with status:", status, "Bytes sent", len(buf))
 
 		if err == nil {
 			return
